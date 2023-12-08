@@ -3,19 +3,44 @@
 #  ------------------------------------------------------------------
 import pandas as pd  # tratamento de dados
 import numpy as np  # ferramentas matemáticas
+import openpyxl
 
-def grafLinha(file):
+def importFile (file):
     if '\\' in file:
         file = file.replace('\\', '/')
-
+    data = ''
     # abrindo o arquivo
-    for eng in ['odf','openpyxl', 'pyxlsb', 'xlrd']:
-        try:
-            data = pd.read_excel(file, engine=eng)  
-        except:
-            print(f"Não foi possível ler o arquivo usando {eng}.")
-      
+    countError = 0
+    try:
+        wb_openpyxl = openpyxl.load_workbook(file)
+        ws_openpyxl = wb_openpyxl.active
+        columns = [cell.value for cell in ws_openpyxl[1]]
+        data_openpyxl = ws_openpyxl.iter_rows(min_row=2, values_only=True)
+        data = pd.DataFrame(data_openpyxl, columns=columns)
+    except:
+        print(f"Não foi possível ler o arquivo.")
+        print(f"error = {countError}.")
+        countError = 1
 
+    if countError == 0:
+        print(f'countError = {countError}')
+        return data
+
+    else:
+        print("Encerrando...")
+        print(f'countError = {countError}')
+        return countError    
+    
+
+
+def grafLinha(file):
+    x = importFile(file)
+    if type(x) == int:
+        return x
+    else:
+        data = x
+        
+        
     # novo df com 3 colunas: tempo x bac x resist
     df = data[['dh_prescricao_lancamento','ds_micro_organismo','cd_interpretacao_antibiograma']].copy(deep=True)   # deep copy p não alterar os dados originais
     df.rename(columns={"dh_prescricao_lancamento": "tempo", "ds_micro_organismo": "microorganismo", "cd_interpretacao_antibiograma": "status"}, inplace=True)
