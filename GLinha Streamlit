@@ -1,0 +1,17 @@
+import GLinha_Res_Tempo as GL
+import numpy as np
+import pandas as pd
+import altair as alt
+
+df = GL.grafLinha('C:/dados_PBL_nomebonitinho.xlsx')
+
+chart = alt.Chart(df).mark_line().encode(
+    x='tempo',
+    y='status',
+    color='microorganismo',
+)
+
+# Display the chart using Streamlit
+#st.altair_chart(chart, use_container_width=True)
+chart.display()
+chart.save('Res X dia.html')
