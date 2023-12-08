@@ -1,3 +1,6 @@
+#  -----------------------------------------
+#  Micro-serviço 13:  Plot Resistência Adquiria x Bactéria x Tempo
+#  -----------------------------------------
 import pandas as pd  # tratamento de dados
 import numpy as np  # ferramentas matemáticas
 
