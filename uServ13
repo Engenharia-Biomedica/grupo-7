@@ -1,6 +1,6 @@
-#  -----------------------------------------
-#  Micro-serviço 13:  Plot Resistência Adquiria x Bactéria x Tempo
-#  -----------------------------------------
+#  ------------------------------------------------------------------
+#  Micro-serviço 13:  Plot Resistência Adquirida x Bactéria x Tempo
+#  ------------------------------------------------------------------
 import pandas as pd  # tratamento de dados
 import numpy as np  # ferramentas matemáticas
 
@@ -9,7 +9,12 @@ def grafLinha(file):
         file = file.replace('\\', '/')
 
     # abrindo o arquivo
-    data = pd.read_excel(file)  
+    for eng in ['odf','openpyxl', 'pyxlsb', 'xlrd']:
+        try:
+            data = pd.read_excel(file, engine=eng)  
+        except:
+            print(f"Não foi possível ler o arquivo usando {eng}.")
+      
 
     # novo df com 3 colunas: tempo x bac x resist
     df = data[['dh_prescricao_lancamento','ds_micro_organismo','cd_interpretacao_antibiograma']].copy(deep=True)   # deep copy p não alterar os dados originais
