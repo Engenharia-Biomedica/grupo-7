@@ -30,8 +30,3 @@ def importFile (file):
         print("Encerrando...")
         print(f'countError = {countError}')
         return countError    
-    
-def upload(x):
-    file = importFile (x)
-    return file
-

@@ -28,6 +28,6 @@ st.markdown("O BACView promove a visualização de dados a cerca da relação en
 # upload dos dados
 file = st.file_uploader('Upload dos dados')
 
-temp = M1.upload(file)
+temp = M1.importFile(file)
 def fileActive():
     return temp

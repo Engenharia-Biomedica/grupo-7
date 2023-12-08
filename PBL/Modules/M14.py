@@ -3,11 +3,10 @@
 #  ------------------------------------------------------------------
 import pandas as pd  # tratamento de dados
 import numpy as np  # ferramentas matemáticas
-import openpyxl
-import uServ0 as S0
+import M1
 
 def grafLinha(file):
-    x = S0.importFile(file)
+    x = M1.importFile(file)
     if type(x) == int:
         return x
     else:
