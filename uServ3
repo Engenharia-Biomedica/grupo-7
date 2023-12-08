@@ -1,3 +1,6 @@
+#  ----------------------------------------------
+#  Micro-serviço 3:  Base do tratamento de dados
+#  ----------------------------------------------
 # Importa a biblioteca pandas com o alias pd
 import pandas as pd
 
